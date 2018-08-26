@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const User = require('../../../models/user')
+const db = require('../../../models');
 
 /*
     POST /api/auth/register
@@ -12,6 +12,9 @@ const User = require('../../../models/user')
 exports.register = (req, res) => {
     const { username, password } = req.body
     let newUser = null
+
+    console.log(username) // Printed
+    console.log(password) // Printed
 
     // create a new user if does not exist
     const create = (user) => {
@@ -54,7 +57,7 @@ exports.register = (req, res) => {
     }
 
     // check username duplication
-    User.findOneByUsername(username)
+    db.user.findByUsername(username)
     .then(create)
     .then(count)
     .then(assign)
@@ -123,7 +126,7 @@ exports.login = (req, res) => {
     }
 
     // find the user
-    User.findOneByUsername(username)
+    db.user.findOneByUsername(username)
     .then(check)
     .then(respond)
     .catch(onError)

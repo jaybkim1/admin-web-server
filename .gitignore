@@ -17,6 +17,6 @@ node_modules
 npm-debug.log
 package-lock.json
 
-# personal use
+# Personal Configuration files
 config.js
 config.json
