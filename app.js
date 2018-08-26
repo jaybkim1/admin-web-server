@@ -4,7 +4,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const mongoose = require('mongoose')
+const db = require('./models');
 
 /* =======================
     LOAD THE CONFIG
@@ -35,20 +35,12 @@ app.get('/', (req, res) => {
 // configure api router
 app.use('/api', require('./routes/api'))
 
-// open the server
-app.listen(port, () => {
-    console.log(`Express is running on port ${port}`)
-})
-
 /* =======================
-    CONNECT TO MONGODB SERVER
+    CONNECT TO MYSQL SERVER USING SEQUELIZE
 ==========================*/
-mongoose.connect(config.mongodbUri, {
-    useMongoClient: true
-}); 
-mongoose.Promise = global.Promise
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-    console.log('Successfully Connected to Mongodb Server')
+db.sequelize.sync().then(function () {
+    // open the server
+    app.listen(port, () => {
+        console.log(`Express is running on port ${port}`)
+    })
 });
