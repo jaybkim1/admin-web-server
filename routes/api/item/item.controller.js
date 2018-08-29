@@ -7,7 +7,7 @@ const db = require('../../../models');
 
 exports.all = (req, res) => {
     console.log('Hello List')
-    db.item.findAll({}).then(function (result) {
+    db.Item.findAll({}).then(function (result) {
         res.json(result);
     });
 }

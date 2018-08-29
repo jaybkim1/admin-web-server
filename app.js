@@ -38,9 +38,15 @@ app.use('/api', require('./routes/api'))
 /* =======================
     CONNECT TO MYSQL SERVER USING SEQUELIZE
 ==========================*/
-db.sequelize.sync().then(function () {
-    // open the server
-    app.listen(port, () => {
-        console.log(`Express is running on port ${port}`)
-    })
+db.sequelize.sync()
+    .then(() => {
+        console.log(' ✓ DB connection success.');
+        // open the server
+        app.listen(port, () => {
+            console.log(` ✓ Express is running on port ${port}`)
+        })
+    }).catch(err => {
+        console.error(err);
+        console.log(' ✗ DB connection error. Please make sure DB is running.');
+        process.exit();
 });
