@@ -58,25 +58,16 @@ exports.login = (req, res) => {
                 // create a promise that generates jwt asynchronously
                 const token = new Promise((resolve, reject) => {
                     jwt.sign({
+                        id: user.id,
                         email: user.email
                     }, config.secret.key ,{
                         expiresIn: '1h', // 60, 2 days, 10h, 7d
+                        issuer: 'thejayb.net',
+                        subject: 'userInfo'
                     }, (err, token) => {
                         if (err) reject(err)
                         resolve(token)
                     })
-
-                    // jwt.sign({
-                    //     id: user.id,
-                    //     email: user.email
-                    // }, config.secret.key ,{
-                    //     expiresIn: '1h', // 60, 2 days, 10h, 7d
-                    //     issuer: 'thejayb.net',
-                    //     subject: 'userInfo'
-                    // }, (err, token) => {
-                    //     if (err) reject(err)
-                    //     resolve(token)
-                    // })
                 })
                 return token
             } else {
