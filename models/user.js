@@ -1,7 +1,20 @@
 module.exports = function (sequelize, DataTypes) {
     const user = sequelize.define('User', {
-        email: { field: 'email', type: DataTypes.STRING(50), allowNull: false },
-        password: { field: 'password', type: DataTypes.STRING(50), allowNull: false }
+        id: {
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER(11)
+        },
+        email: { 
+            field: 'email', 
+            type: DataTypes.STRING(50), 
+            allowNull: false 
+        },
+        password: { 
+            field: 'password', 
+            type: DataTypes.STRING(50), 
+            allowNull: false 
+        }
     }, {
         // don't use camelcase for automatically added attributes but underscore style
         // so updatedAt will be updated_at

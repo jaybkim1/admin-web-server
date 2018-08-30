@@ -17,7 +17,7 @@ const port = process.env.PORT || 3000
 ==========================*/
 const app = express()
 
-// parse JSON and url-encoded query
+// parse JSON and url-encoded json query
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 

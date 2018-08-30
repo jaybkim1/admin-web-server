@@ -1,8 +1,25 @@
 module.exports = function (sequelize, DataTypes) {
     const item = sequelize.define('Item', {
-        name: { field: 'name', type: DataTypes.STRING(50), allowNull: true },
-        price: { field: 'price', type: DataTypes.DECIMAL(50), allowNull: true },
-        category: { field: 'category', type: DataTypes.STRING(50), allowNull: true }
+        id: {
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER(11)
+        },
+        name: { 
+            field: 'name', 
+            type: DataTypes.STRING(50), 
+            allowNull: true 
+        },
+        price: { 
+            field: 'price', 
+            type: DataTypes.DECIMAL(50), 
+            allowNull: true 
+        },
+        category: { 
+            field: 'category', 
+            type: DataTypes.STRING(50), 
+            allowNull: true 
+        }
     }, {
         // don't use camelcase for automatically added attributes but underscore style
         // so updatedAt will be updated_at
