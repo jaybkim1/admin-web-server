@@ -1,9 +1,12 @@
+'use strict';
+
 module.exports = function (sequelize, DataTypes) {
     const user = sequelize.define('User', {
         id: {
             autoIncrement: true,
             primaryKey: true,
-            type: DataTypes.INTEGER(11)
+            type: DataTypes.INTEGER(11),
+            allowNull: false
         },
         email: { 
             field: 'email', 
