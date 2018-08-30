@@ -10,7 +10,9 @@ exports.all = (req, res) => {
         res.json(result);
     })
     .catch(err => {
-        console.error(err);
+        console.error({
+            error: err
+        });
     });
 }
 
