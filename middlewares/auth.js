@@ -3,7 +3,7 @@ const config = require('../config')
 
 const authMiddleware = (req, res, next) => {
     // read the token from header or url 
-    const token = req.headers['X-Access-Token'] || req.query.token
+    const token = req.headers['x-access-token'] || req.query.token
 
     // token does not exist
     if(!token) {
@@ -17,7 +17,9 @@ const authMiddleware = (req, res, next) => {
     const p = new Promise(
         (resolve, reject) => {
             jwt.verify(token, config.secret.key, (err, decoded) => {
-                if(err) reject(err)
+                if(err) 
+                    reject(err)
+
                 resolve(decoded)
             })
         }

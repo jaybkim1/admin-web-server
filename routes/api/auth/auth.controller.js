@@ -45,10 +45,6 @@ exports.login = (req, res) => {
 
     const { email, password } = req.body;
 
-    // 인증
-    // 토큰생성
-    // 리턴 
-
     // check the user info & generate the jwt
     const authenticate = (user) => {
         // check if user exists
@@ -59,7 +55,8 @@ exports.login = (req, res) => {
                 const token = new Promise((resolve, reject) => {
                     jwt.sign({
                         id: user.id,
-                        email: user.email
+                        email: user.email,
+                        admin: true
                     }, config.secret.key ,{
                         expiresIn: '1h', // 60, 2 days, 10h, 7d
                         issuer: 'thejayb.net',
@@ -81,7 +78,6 @@ exports.login = (req, res) => {
     // respond the token 
     const respond = (token) => {
         res.json({
-            message: 'logged in successfully',
             token
         })
     }
@@ -102,28 +98,18 @@ exports.login = (req, res) => {
 }
 
 exports.test = (req, res) => {
-
     const { token } = req.body;
 
     // verify token with secret
     jwt.verify(token, config.secret.key, function (err, decoded) {
         console.log(decoded);
+        res.json(decoded)
     });
-
-    // get the decoded payload and header
-    // const decoded = jwt.decode(token, config.secret.key);
-    // console.log(decoded.header);
-    // console.log(decoded.payload
-    
-  
 }
 
 /*
     GET /api/auth/check
 */
-
-
-
 
 exports.check = (req, res) => {
     res.json({
