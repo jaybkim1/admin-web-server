@@ -13,7 +13,7 @@ exports.list = (req, res) => {
         })
     }
 
-    models.User.find({}, '-password').exec()
+    models.user.find({}, '-password').exec()
     .then(
         users=> {
             res.json({users})
@@ -35,7 +35,7 @@ exports.assignAdmin = (req, res) => {
         })
     }
 
-    models.User.findOneByUsername(req.params.username)
+    models.user.findOneByUsername(req.params.username)
     .then(
         user => {
             if(!user) throw new Error('user not found')

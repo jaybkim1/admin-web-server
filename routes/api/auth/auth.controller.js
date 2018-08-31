@@ -15,7 +15,7 @@ exports.register = (req, res) => {
             return res.json({ result: 'Duplicate_Account' });
         } else {
             // register an account
-            return models.User.create({
+            return models.user.create({
                 email: email,
                 password: password
             })
@@ -35,7 +35,7 @@ exports.register = (req, res) => {
     }
 
     // if not using Promise, there will be nested complicated structure
-    models.User.findOne({ where: { email: email } })
+    models.user.findOne({ where: { email: email } })
     .then(create)
     .then(respond)
     .catch(onError)
@@ -90,7 +90,7 @@ exports.login = (req, res) => {
     }
 
     // find the user
-    models.User.findOne({ where: { email: email } })
+    models.user.findOne({ where: { email: email } })
         .then(authenticate)
         .then(respond)
         .catch(onError)

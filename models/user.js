@@ -1,43 +1,31 @@
-'use strict';
+/* jshint indent: 2 */
 
-module.exports = function (sequelize, DataTypes) {
-    const user = sequelize.define('User', {
-        id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: DataTypes.INTEGER(11),
-            allowNull: false
-        },
-        email: { 
-            field: 'email', 
-            type: DataTypes.STRING(50), 
-            allowNull: false 
-        },
-        password: { 
-            field: 'password', 
-            type: DataTypes.STRING(50), 
-            allowNull: false 
-        }
-    }, {
-        // don't use camelcase for automatically added attributes but underscore style
-        // so updatedAt will be updated_at
-        underscored: true,
-
-        // disable the modification of tablenames; By default, sequelize will automatically
-        // transform all passed model names (first parameter of define) into plural.
-        // if you don't want that, set the following
-        freezeTableName: true,
-        
-        // define the table's name
-        tableName: 'user'
-    });
-
-    return user;
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('user', {
+    id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    security_level: {
+      type: DataTypes.CHAR(1),
+      allowNull: true
+    },
+    reg_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    }
+  }, {
+    tableName: 'user'
+  });
 };
-
-/*
- Sequelize 참고
- DataTypes => http://docs.sequelizejs.com/en/v3/api/datatypes/
- Associations => http://docs.sequelizejs.com/en/v3/api/associations/
- Model Function => http://docs.sequelizejs.com/en/v3/api/model/
- */

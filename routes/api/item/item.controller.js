@@ -6,13 +6,11 @@ const db = require('../../../models');
 */
 
 exports.all = (req, res) => {
-    db.Item.findAll({}).then(function (result) {
+    db.item.findAll({}).then(function (result) {
         res.json(result);
     })
     .catch(err => {
-        console.error({
-            error: err
-        });
+        console.error(err);
     });
 }
 
@@ -22,7 +20,7 @@ exports.all = (req, res) => {
 */
 
 exports.new = (req, res) => {
-    db.Item.create({
+    db.item.create({
         name: req.body.name,
         price: req.body.price,
         category: req.body.category
@@ -35,7 +33,7 @@ exports.new = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    db.Item.update({
+    db.item.update({
         name: req.body.name,
         price: req.body.price,
         category: req.body.category
@@ -52,7 +50,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    db.Item.destroy({
+    db.item.destroy({
         where: {
             id: req.params.id
         }
