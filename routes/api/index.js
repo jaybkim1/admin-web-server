@@ -5,7 +5,7 @@ const user = require('./user')
 const item = require('./item')
 
 router.use('/auth', auth)
-router.use('/user', authMiddleware)
+router.use('/user', authMiddleware) // 로그인 됬는지 권한 체크
 router.use('/user', user)
 router.use('/item', item)
 

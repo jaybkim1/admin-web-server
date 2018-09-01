@@ -23,8 +23,12 @@ exports.register = (req, res) => {
     }
 
     // respond to the client
-    const respond = (newUser) => {
-        res.json(newUser)
+    const respond = (user) => {
+        res.json({
+            id: user.id,
+            email: user.email,
+            security_level: user.security_level
+        })
     }
 
     // run when there is an error (username exists)
@@ -56,11 +60,10 @@ exports.login = (req, res) => {
                     jwt.sign({
                         id: user.id,
                         email: user.email,
-                        admin: true
+                        security_level: user.security_level
                     }, config.secret.key ,{
-                        expiresIn: '1h', // 60, 2 days, 10h, 7d
-                        issuer: 'thejayb.net',
-                        subject: 'userInfo'
+                        issuer: 'admin.thejayb.net',
+                        expiresIn: '1d', // 10s, 5m, 1h, 1d ...
                     }, (err, token) => {
                         if (err) reject(err)
                         resolve(token)
@@ -97,23 +100,11 @@ exports.login = (req, res) => {
 
 }
 
-exports.test = (req, res) => {
-    const { token } = req.body;
-
-    // verify token with secret
-    jwt.verify(token, config.secret.key, function (err, decoded) {
-        console.log(decoded);
-        res.json(decoded)
-    });
-}
-
-/*
-    GET /api/auth/check
-*/
-
 exports.check = (req, res) => {
     res.json({
         success: true,
         info: req.decoded
     })
 }
+
+// 직원계정 관리 (list API 만든 후 다 뿌려주고 수정, 삭제, 보안 레벨 변경) (보안 레벨 등록 - 드롭다운으로 선택할 수 있게 구현) - 슈퍼권한, 일반, 연구원

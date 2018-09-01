@@ -18,7 +18,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     security_level: {
       type: DataTypes.CHAR(1),
-      allowNull: true
+      allowNull: true,
+      defaultValue: '0'
     },
     reg_date: {
       type: DataTypes.DATE,
@@ -26,6 +27,8 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
-    tableName: 'user'
+    tableName: 'user',
+    createdAt: false,
+    updatedAt: false
   });
 };

@@ -1,12 +1,8 @@
 
-const db = require('../../../models');
+const models = require('../../../models');
 
-/* 
-    GET /api/item
-*/
-
-exports.all = (req, res) => {
-    db.item.findAll({}).then(function (result) {
+exports.list = (req, res) => {
+    models.item.findAll({}).then(function (result) {
         res.json(result);
     })
     .catch(err => {
@@ -14,13 +10,8 @@ exports.all = (req, res) => {
     });
 }
 
-
-/*
-    POST /api/item
-*/
-
 exports.new = (req, res) => {
-    db.item.create({
+    models.item.create({
         name: req.body.name,
         price: req.body.price,
         category: req.body.category
@@ -33,7 +24,7 @@ exports.new = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    db.item.update({
+    models.item.update({
         name: req.body.name,
         price: req.body.price,
         category: req.body.category
@@ -50,7 +41,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    db.item.destroy({
+    models.item.destroy({
         where: {
             id: req.params.id
         }

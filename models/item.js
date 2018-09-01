@@ -22,10 +22,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     reg_date: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+      allowNull: false
     }
   }, {
-    tableName: 'item'
+    tableName: 'item',
+    createdAt: false,
+    updatedAt: false
   });
 };
